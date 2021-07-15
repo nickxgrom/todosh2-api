@@ -1,0 +1,25 @@
+{
+  "name": "todosh2-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickxgrom/todosh2-api.git"
+  },
+  "author": "Nick Gromyko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nickxgrom/todosh2-api/issues"
+  },
+  "homepage": "https://github.com/nickxgrom/todosh2-api#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.5"
+  }
+}
