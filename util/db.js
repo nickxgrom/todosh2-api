@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize')
+const { Sequelize } = require('sequelize')
 
 module.exports = new Sequelize('todoosh', 'root', 'root', {
     host: 'localhost',

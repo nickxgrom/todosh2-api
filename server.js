@@ -3,9 +3,11 @@ const express = require('express'),
     PORT = process.argv[2] || 8080,
     bodyParser = require('body-parser'),
     db = require('./util/db'),
-    ServiceError = require('./util/ServiceError');
+    ServiceError = require('./util/ServiceError'),
+    router = require("./src/router");
 
 app.use(bodyParser.json())
+app.use(router)
 
 app.use( (err, req, res, next) => {
     if (err instanceof ServiceError) {
