@@ -17,5 +17,9 @@ module.exports = db.define("task", {
     isDone: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
+    },
+    userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     }
 })

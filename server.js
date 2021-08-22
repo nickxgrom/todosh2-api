@@ -4,8 +4,10 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     db = require('./util/db'),
     ServiceError = require('./util/ServiceError'),
-    router = require("./src/router");
+    router = require("./src/router"),
+    authToken = require('./util/authToken');
 
+app.use(authToken)
 app.use(bodyParser.json())
 app.use(router)
 
