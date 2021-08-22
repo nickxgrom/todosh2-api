@@ -5,8 +5,10 @@ const express = require('express'),
     db = require('./util/db'),
     ServiceError = require('./util/ServiceError'),
     router = require("./src/router"),
+    cors = require('cors');
     authToken = require('./util/authToken');
 
+app.use(cors())
 app.use(authToken)
 app.use(bodyParser.json())
 app.use(router)
