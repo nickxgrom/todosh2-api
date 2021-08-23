@@ -16,4 +16,9 @@ router.put('/api/task/:id', catchError(async (req, res, next) => {
     res.sendStatus(204)
 }))
 
+router.delete('/api/task/:id', catchError(async (req, res, next) => {
+    await TaskService.deleteTask(req.params.id, req.auth.userId)
+    res.sendStatus(204)
+}))
+
 module.exports = router

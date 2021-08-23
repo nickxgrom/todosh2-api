@@ -29,5 +29,13 @@ module.exports = {
         }
 
         await TaskModel.update({ name, description, isDone }, { where: {id: taskId}} )
+    },
+
+    deleteTask: async (taskId, userId) => {
+        if (!await TaskModel.findOne({ where: {id: taskId, userId} })) {
+            throw new ServiceError(404, 'Task is not exist')
+        }
+
+        await TaskModel.destroy({ where: { id: taskId } })
     }
 }
