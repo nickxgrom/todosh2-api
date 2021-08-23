@@ -21,5 +21,13 @@ module.exports = {
 
     getAllTasks: async (userId) => {
         return await TaskModel.findAll({ where: { userId } })
+    },
+
+    updateTask: async (taskId, name, description, isDone, userId) => {
+        if (!await TaskModel.findOne({ where: {id: taskId, userId} })) {
+            throw new ServiceError(404, 'Task is not exist')
+        }
+
+        await TaskModel.update({ name, description, isDone }, { where: {id: taskId}} )
     }
 }
