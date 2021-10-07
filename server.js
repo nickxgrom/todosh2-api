@@ -9,7 +9,7 @@ const express = require('express'),
     authToken = require('./util/authToken');
 
 app.use(cors())
-app.use(authToken)
+app.use(/api\/*/, authToken)
 app.use(bodyParser.json())
 app.use(router)
 
