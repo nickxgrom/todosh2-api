@@ -5,8 +5,8 @@ const router = require('express').Router(),
 
 //registration
 router.post(`${baseUrl}/registration`, catchError(async (req, res, next) => {
-    await UserService.createUser(req.query.username, req.query.password)
-    res.sendStatus(201)
+    const token = await UserService.createUser(req.query.username, req.query.password)
+    res.status(201).json(token)
 }))
 
 //get auth tokens
