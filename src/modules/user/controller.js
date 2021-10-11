@@ -9,6 +9,12 @@ router.post(`${baseUrl}/registration`, catchError(async (req, res, next) => {
     res.status(201).json(token)
 }))
 
+//login
+router.post(`${baseUrl}/login`, catchError( async (req, res, next) => {
+    const token = await UserService.logIn(req.query.username, req.query.password)
+    res.status(200).json(token)
+}))
+
 //get auth tokens
 router.get(`${baseUrl}`, catchError((req, res, next) => {
 

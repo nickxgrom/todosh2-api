@@ -3,12 +3,10 @@ const ServiceError = require("../../../util/ServiceError");
 const jwt = require("jsonwebtoken");
 
 async function isUserExist(username) {
-    if (await User.findOne({ where: { username }})) {
-        throw new ServiceError(400, 'User with this username is already exist')
-    }
+    return Boolean(await User.findOne({ where: { username }}))
 }
 
-async function logIn(id, username) {
+async function signJwt(id, username) {
     // default algorithm hs256
     const token = await jwt.sign({
             id,
@@ -23,12 +21,25 @@ async function logIn(id, username) {
 
 module.exports = {
     createUser: async (username, password) => {
-        await isUserExist(username)
+        if (await isUserExist(username)) {
+            throw new ServiceError(400, 'User with given username is already exist')
+        }
         // TODO: add hash-function to hash a password
         const user = await User.create({ username, password })
         return {
-            token: await logIn(user.id, user.username),
+            token: await signJwt(user.id, user.username),
         }
+    },
+
+    logIn: async (username, password) => {
+        const user = await User.findOne( { where: { username } } )
+        if (user) {
+            // TODO: optional operator doesn't work, 'cause node 10. add hash-function
+            if (user.password === password) {
+                return { token: await signJwt(user.id, user.username) }
+            }
+        }
+        throw new ServiceError(404, "Wrong login or password")
     },
 
     updateUsername: () => {
